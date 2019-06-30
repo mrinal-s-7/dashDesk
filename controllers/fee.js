@@ -42,7 +42,7 @@ angular.module('paymentsApp', ['ngCookies'])
 
       $scope.initializeContent = function(){
         $scope.newPaymentContent = {};
-        $scope.newPaymentContent.title = "";
+        $scope.newPaymentContent.uid = "";
         $scope.newPaymentContent.brief = "";
         $scope.newPaymentContent.target = "";
         $scope.newPaymentContent.targetAudience = "";
@@ -106,7 +106,7 @@ angular.module('paymentsApp', ['ngCookies'])
   var eventDate = new Date(newDate).getTime();
   var patt =/(0[1-9]|[12][0-9]|3[01])[-](0[1-9]|1[012])[-](19|20)\d\d/;
 
-    if($scope.newPaymentContent.title === ""){
+    if($scope.newPaymentContent.uid === ""){
                   $scope.newContentSaveError = "Give a title to the payment";
                 }
                  
@@ -150,7 +150,7 @@ angular.module('paymentsApp', ['ngCookies'])
             
                var data = {};
                data.token = $cookies.get("dashManager");
-               data.title = $scope.newPaymentContent.title;
+               data.title = $scope.newPaymentContent.uid;
                data.brief = $scope.newPaymentContent.brief; 
                data.amount = $scope.newPaymentContent.amount;
                data.target = $scope.newPaymentContent.targetAudience;

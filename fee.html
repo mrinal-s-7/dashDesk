@@ -313,9 +313,10 @@
                                           <thead>
                                              <tr>
                                                 <th style="font-weight: bold;">#</th>
-                                                <th style="font-weight: bold;">Expiry Date</th>
-                                                <th style="color: #3498db; font-weight: bold;">Title</th>
-                                                <th style="color: #e74c3c; font-weight: bold;">Brief</th>
+                                                <th style="font-weight: bold;">Due Date</th>
+                                                <th style="color: #3498db; font-weight: bold;">UID</th>
+                                                <th style="color: #e74c3c; font-weight: bold;">Fee ID</th>
+                                                <th style="color: #3498db; font-weight: bold;">Payment Type</th>
                                                 <th style="color: #1abc9c; font-weight: bold;">Payment Status</th>                                         
                                              </tr>
                                           </thead>
@@ -327,6 +328,8 @@
                                                 <td style="color: #3498db;font-weight: 300;">{{payment.title}} <br>
                                                 </td>
                                                 <td style="color: #e74c3c;font-weight: 300;">{{payment.brief}}<br>
+                                                </td>
+                                                 <td style="color: #3498db;font-weight: 300;">{{payment.title}} <br>
                                                 </td>
                                                 <td style="color: #1abc9c;">{{payment.paymentCount}} / {{payment.targetCount}} <br>
                                                 </td> 
@@ -366,7 +369,7 @@
                                              <tr>
                                                 <th style="font-weight: bold;">#</th>
                                                 <th style="font-weight: bold;">Status</th>
-                                                <th style="color: #3498db; font-weight: bold;">Roll No</th>
+                                                <th style="color: #3498db; font-weight: bold;">Candidate Code</th>
                                                 <th style="color: #e74c3c; font-weight: bold;">Amount</th>
                                                 <th style="color: #1abc9c; font-weight: bold;">Payment Date</th>                                       
                                              </tr>
@@ -409,17 +412,21 @@
                            <h2>New Payment</h2>
                            <form>
                            <div class="row">
-                              <div class="col-sm-5">
-                                 <label class="myPaymentLabel">Payment Title</label>
-                                 <input type="text" ng-model="newPaymentContent.title" class="form-control input-lg" placeholder="Enter a suitable, short title">
+                              <div class="col-sm-4">
+                                 <label class="myPaymentLabel">UID</label>
+                                 <input type="text" ng-model="newPaymentContent.uid" class="form-control input-lg" placeholder="Enter UID">
                               </div>
-                              <div class="col-sm-7">
-                                 <label class="myPaymentLabel">Brief</label>
-                                 <input type="text" ng-model="newPaymentContent.brief" class="form-control input-lg" placeholder="What is your payment about?">
+                              <div class="col-sm-4">
+                                 <label class="myPaymentLabel">Fee ID</label>
+                                 <input type="text" ng-model="newPaymentContent.feeId" class="form-control input-lg" placeholder="Enter the fee id">
+                              </div>
+                              <div class="col-sm-4">
+                                 <label class="myPaymentLabel">Candidate Code</label>
+                                 <input type="text" ng-model="newPaymentContent.title" class="form-control input-lg" placeholder="Enter candidate code">
                               </div>
                            </div>
                            <div class="row" style="margin-top: 15px;">
-                              <div class="col-sm-5">
+                              <div class="col-sm-5"> 
                                  <label class="myPaymentLabel">Amount</label>
                                  <input type="number" ng-model="newPaymentContent.amount" class="form-control input-lg" placeholder="Enter the amount to be paid">
                               </div>
@@ -434,20 +441,20 @@
                            </div>  
                            <div class="row" style="margin-top: 15px;">
                               <div class="col-sm-7">
-                                 <label class="myPaymentLabel">Target</label>
+                                 <label class="myPaymentLabel">Type of Payment</label>
                                  <select ng-model="newPaymentContent.target" class="form-control" placeholder="">
-                                    <option value ="0" selected="">Everyone</option>
-                                    <option value ="1">Class Specific</option>
-                                    <option value ="2">Section Specific</option>
+                                    <option value ="0" selected="">One-Time</option>
+                                    <option value ="1">Installments</option>
+                                    <option value ="2">Monthly</option>
                                  </select>
                               </div> 
                               <div ng-if="newPaymentContent.target == 1" class="col-sm-5" ng-if="newPaymentContent.target != 0">
-                                 <label class="myPaymentLabel">Target Specific</label>
+                                 <label class="myPaymentLabel">No of Installments</label>
                                  <select ng-model="newPaymentContent.targetSpecific" class="form-control" placeholder="">
-                                    <option disabled="" value="0" selected="">-- Select Class --</option>
-                                    <option value ="PKG">PKG</option>
+                                    <option disabled="" value="0" selected="">-- No of Installments --</option>
+                                    <!--<option value ="PKG">PKG</option>
                                     <option value ="LKG">LKG</option>
-                                    <option value ="UKG">UKG</option>
+                                    <option value ="UKG">UKG</option>-->
                                     <option value ="1">1</option>
                                     <option value ="2">2</option>
                                     <option value ="3">3</option>
@@ -462,7 +469,7 @@
                                     <option value ="12">12</option>
                                  </select>
                               </div>
-                              <div ng-if="newPaymentContent.target == 2" class="col-sm-5" ng-if="newPaymentContent.target != 0">
+                              <!--div ng-if="newPaymentContent.target == 2" class="col-sm-5" ng-if="newPaymentContent.target != 0">
                                  <label class="myPaymentLabel">Target Specific</label>
                                  <select ng-model="newPaymentContent.targetSpecific" class="form-control" placeholder="">
                                     <option disabled="" value="0" selected="">-- Select Section --</option>
@@ -472,10 +479,10 @@
                                     <option value ="HS">High School</option>
                                     <option value ="HSS">Higher Secondary</option>
                                  </select>
-                              </div>
+                              </div-->
 
                            </div>
-                           <div class="row" style="margin-top: 15px;">
+                           <!--div class="row" style="margin-top: 15px;">
                               <div class="col-md-7" ng-if="newPaymentContent.target !== '' && newPaymentContent.targetSpecific !== '' && newPaymentContent.target != 0">
                                  <label>Choose your Target from below:  </label>
                                  <input type="text" class="form-control" ng-model="newPaymentContent.targetAudience" id="tokenfield-typeahead"/>
@@ -483,8 +490,17 @@
                                  <p style="font-size: 11px; color: #bdc3c7; margin-top: 5px;">Available Targets:<tag ng-repeat="target in targetList" class="btn btn-info-alt btn-xs" ng-attr-id="{{ 'button1_' + target.value }}" style="margin-left: 4px" ng-click="addTarget(target.value)">{{target.value}}</tag> </p>
                               </div>
 
-                           </div>
+                           </div-->
 
+                              <div class="row" style="margin-top: 15px;">
+                              <div class="col-sm-6">
+                                 <label class="myPaymentLabel">Mode of Payment</label>
+                                 <select ng-model="newPaymentContent.target" class="form-control" placeholder="">
+                                    <option value ="0" selected="">Cash</option>
+                                    <option value ="1">Card</option>
+                                    <option value ="2">Other</option>
+                                 </select>
+                              </div> </div>
                            
                            </form>  
                            <p style="color: #e74c3c; font-weight: bold; margin: 10px 0px 0px 0px; text-align: center; padding-bottom: 3%;">{{newContentSaveError}}</p>

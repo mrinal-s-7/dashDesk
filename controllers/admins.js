@@ -6,7 +6,7 @@ angular.module('adminsApp', ['ngCookies'])
 
   .controller('adminsController', function($scope, $http, $interval, $cookies) {
   
-      //Check if logged in
+     //Check if logged in
       if($cookies.get("dashManager")){
         $scope.isLoggedIn = true;
       }

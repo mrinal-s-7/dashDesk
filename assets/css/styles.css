@@ -760,6 +760,7 @@ table {
 td,
 th {
   padding: 0;
+ 
 }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
@@ -22216,7 +22217,7 @@ ul .panel .panel-heading h2 {
 }
 .panel.panel-default .panel-heading {
   color: #9e9e9e;
-  background-color: #fafafa;
+  background-color: #009688;
   border-color: #fafafa;
 }
 .panel.panel-default .panel-heading h2 {
